@@ -1,0 +1,56 @@
+{
+    "meta": {
+        "title": "ZHP Geneartor Rozkazów"
+    },
+
+    "app": {
+        "name1": "Generator",
+        "name2": "Rozkazów"
+    },
+
+    "nav": {
+        "register": "Rejestracja",
+        "login": "Logowanie"
+    },
+
+    "register": {
+        "title": "Rejestracja",
+        "firstname": "Imię",
+        "surname": "Nazwisko",
+        "email": "Email",
+        "username": "Nazwa użytkownika",
+        "password": "Hasło",
+        "confirmPassword": "Powtórz hasło",
+        "submit": "Zarejestruj się",
+        "success": "Rejestracja zakończona sukcesem!",
+        "error": "Wystąpił błąd",
+        "networkError": "Błąd połączenia",
+        "errorRequired": "To pole jest wymagane",
+        "invalidEmail": "Nieprawidłowy adres e-mail",
+        "passwordTooShort": "Hasło musi mieć co najmniej 8 znaków",
+        "passwordsDontMatch": "Hasła nie są takie same"
+    },
+
+    "login": {
+        "title": "Logowanie",
+        "username": "Nazwa użytkownika",
+        "password": "Hasło",
+        "submit": "Zaloguj się",
+        "errorRequired": "To pole jest wymagane",
+        "error": "Błąd logowania",
+        "networkError": "Błąd sieci",
+        "wrongCredentials": "Nieprawidłowe login lub hasło",
+        "noAccount": "Nie masz jeszcze konta?",
+        "register": "Zarejestruj się"
+    },
+
+    "footer": {
+        "text": "Generator Rozkazów ZHP",
+        "year": "Copyright © 2025",
+        "author": "Wiktor Idziński"
+    },
+      
+
+    "welcome": "Witaj w mojej aplikacji!"
+}
+  
