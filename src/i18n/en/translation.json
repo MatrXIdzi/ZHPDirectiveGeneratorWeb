@@ -1,0 +1,55 @@
+{
+    "meta": {
+        "title": "ZHP Directive Geneartor"
+    },
+
+    "app": {
+        "name1": "Directive",
+        "name2": "Generator"
+    },
+
+    "nav": {
+        "register": "Register",
+        "login": "Login"
+    },
+
+    "register": {
+        "title": "Register",
+        "firstname": "First name",
+        "surname": "last name",
+        "email": "Email",
+        "username": "Username",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "submit": "Submit",
+        "success": "Registration successful!",
+        "error": "Error occurred",
+        "networkError": "Network error",
+        "errorRequired": "This field is required",
+        "invalidEmail": "Incorrect email address",
+        "passwordTooShort": "Password must be at least 8 characters long",
+        "passwordsDontMatch": "Passwords do not match"
+    },
+
+    "login": {
+        "title": "Login",
+        "username": "Username",
+        "password": "Password",
+        "submit": "Log in",
+        "errorRequired": "This field is required",
+        "error": "Login error",
+        "networkError": "Network error",
+        "wrongCredentials": "Incorrect login or password",
+        "noAccount": "Don't have an account yet?",
+        "register": "Register"
+    },
+
+    "footer": {
+        "text": "ZHP Directive Generator",
+        "year": "Copyright © 2025",
+        "author": "Wiktor Idziński"
+    },
+
+    "welcome": "Welcome to my app!"
+}
+  
