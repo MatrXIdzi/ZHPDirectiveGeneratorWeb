@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
@@ -18,6 +18,8 @@ const Register = () => {
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [generalMessage, setGeneralMessage] = useState('');
+  const [emailExists, setEmailExists] = useState('');
+  const [usernameExists, setUsernameExists] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -25,12 +27,72 @@ const Register = () => {
       [e.target.name]: e.target.value,
     });
 
-    // Reset błędu dla danego pola
+    // Reset błędów dla pola
     setFieldErrors({
       ...fieldErrors,
       [e.target.name]: '',
     });
+
+    if (e.target.name === 'email') {
+      setEmailExists('');
+    }
+
+    if (e.target.name === 'username') {
+      setUsernameExists('');
+    }
   };
+
+  const handleEmailBlur = async () => {
+    if (!formData.email) return;
+
+    try {
+      const response = await fetch(`http://localhost:8080/api/auth/check-email?email=${formData.email}`);
+      if (!response.ok) {
+        const err = await response.text();
+        setEmailExists(t(err));
+      } else {
+        setEmailExists('');
+      }
+    } catch (error) {
+      setGeneralMessage(
+        `${t('register.networkError')}: ${
+          error instanceof Error ? error.message : String(error)
+        }`
+      );
+    }
+  };
+
+  const handleUsernameBlur = async () => {
+    if (!formData.username) return;
+
+    try {
+      const response = await fetch(`http://localhost:8080/api/auth/check-username?username=${formData.username}`);
+      if (!response.ok) {
+        const err = await response.text();
+        setUsernameExists(t(err));
+      } else {
+        setUsernameExists('');
+      }
+    } catch (error) {
+      setGeneralMessage(
+        `${t('register.networkError')}: ${
+          error instanceof Error ? error.message : String(error)
+        }`
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (formData.email) {
+      handleEmailBlur();
+    }
+  }, [formData.email]);
+  
+  useEffect(() => {
+    if (formData.username) {
+      handleUsernameBlur();
+    }
+  }, [formData.username]);
 
   const validateForm = () => {
     const errors: Record<string, string> = {};
@@ -68,7 +130,7 @@ const Register = () => {
       });
 
       if (response.ok) {
-        navigate('/'); // przekierowanie po sukcesie
+        navigate('/');
       } else {
         const err = await response.text();
         setGeneralMessage(`${t('register.error')}: ${err}`);
@@ -81,6 +143,8 @@ const Register = () => {
       );
     }
   };
+
+  const isSubmitDisabled = !!emailExists || !!usernameExists;
 
   return (
     <div className="register-container">
@@ -119,8 +183,10 @@ const Register = () => {
             type="email"
             value={formData.email}
             onChange={handleChange}
+            onBlur={handleEmailBlur}
           />
           {fieldErrors.email && <div className="field-error">{fieldErrors.email}</div>}
+          {emailExists && <div className="field-error">{emailExists}</div>}
         </div>
 
         <div className="form-group">
@@ -131,8 +197,10 @@ const Register = () => {
             type="text"
             value={formData.username}
             onChange={handleChange}
+            onBlur={handleUsernameBlur}
           />
           {fieldErrors.username && <div className="field-error">{fieldErrors.username}</div>}
+          {usernameExists && <div className="field-error">{usernameExists}</div>}
         </div>
 
         <div className="form-group">
@@ -159,7 +227,7 @@ const Register = () => {
           {fieldErrors.confirmPassword && <div className="field-error">{fieldErrors.confirmPassword}</div>}
         </div>
 
-        <button type="submit" className="submit-button">
+        <button type="submit" className="submit-button" disabled={isSubmitDisabled}>
           {t('register.submit')}
         </button>
 

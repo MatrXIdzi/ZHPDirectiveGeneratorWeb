@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -15,6 +16,7 @@ const Login = () => {
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [generalMessage, setGeneralMessage] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -26,6 +28,10 @@ const Login = () => {
       ...fieldErrors,
       [e.target.name]: '',
     });
+  };
+
+  const togglePasswordVisibility = () => {
+    setIsVisible(!isVisible);
   };
 
   const validateForm = () => {
@@ -53,13 +59,17 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('token', data.token); // lub dowolna metoda przechowywania
-        navigate('/'); // przekierowanie po sukcesie
+        sessionStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.token);
+        setFormData({ username: '', password: '' });
+        navigate('/');
       } else {
+        formData.password = '';
         const err = await response.json();
         setGeneralMessage(`${t('login.error')}: ${t(err.message)}`);
       }
     } catch (error) {
+      formData.password = '';
       setGeneralMessage(
         `${t('login.networkError')}: ${
           error instanceof Error ? error.message : String(error)
@@ -87,13 +97,19 @@ const Login = () => {
 
         <div className="form-group">
           <label htmlFor="password">{t('login.password')}</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
+          <div className="password-input-container">
+            <input
+              id="password"
+              name="password"
+              type={isVisible ? 'text' : 'password'}
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <button type="button" className="toggle-password" onClick={togglePasswordVisibility}>
+              <i className={isVisible ? "bi bi-eye" : "bi bi-eye-slash"}></i>
+            </button>
+          </div>
+          
           {fieldErrors.password && <div className="field-error">{fieldErrors.password}</div>}
         </div>
 

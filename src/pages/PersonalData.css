@@ -1,0 +1,16 @@
+.personal-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.personal-data-data {
+    background-color: #666;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 1);
+    width: 100%;
+    max-width: 900px;
+}
+  

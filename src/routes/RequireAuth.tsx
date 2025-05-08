@@ -4,11 +4,19 @@ import { JSX } from 'react';
 interface RequireAuthProps {
   children: JSX.Element;
   allowedRoles?: string[];
+  noToken?: boolean;
 }
 
-const RequireAuth = ({ children, allowedRoles }: RequireAuthProps) => {
+const RequireAuth = ({ children, allowedRoles, noToken }: RequireAuthProps) => {
   const location = useLocation();
   const token = localStorage.getItem('token');
+
+  if (noToken && (!token || isTokenExpired(token))) {
+    return children;
+  }
+  else if (noToken && token && !isTokenExpired(token)) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
 
   if (!token || isTokenExpired(token)) {
     // Jeśli nie ma tokena lub jest nieważny → przerzuca na /login
@@ -49,7 +57,6 @@ const getUserRoles = (token: string): string[] => {
     if (Array.isArray(roles)) {
       return roles;
     }
-    console.log('Token roles:', roles);
     return roles ? [roles] : [];
   } catch (error) {
     return [];

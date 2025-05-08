@@ -1,18 +1,46 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import MenuList from './MenuList';
-import MenuItem from './MenuItem';
+import MenuList from '../MenuList';
+import MenuItem from '../MenuItem';
 
-const MenuBar = () => {
+const MenuBarGuest = () => {
   const { i18n, t } = useTranslation();
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
     setLanguageMenuOpen(false);
   };
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        console.error('No token found in local storage');
+        return;
+    }
+    try {
+        const response = await fetch('http://localhost:8080/api/auth/logout', {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+            throw new Error('Logout failed');
+        }
+    } catch (error) {
+        console.error('Error during logout:', error);
+        return;
+    }
+    
+
+    localStorage.removeItem('token');
+    navigate('/login');
+
+  }
 
   return (
     <header
@@ -63,8 +91,8 @@ const MenuBar = () => {
 
             {userMenuOpen && (
               <MenuList>
-                <MenuItem to="/login" label={t('nav.login')} onClick={() => setUserMenuOpen(false)} />
-                <MenuItem to="/register" label={t('nav.register')} onClick={() => setUserMenuOpen(false)} />
+                <MenuItem to="/personal-data" label={t('menu.personalData')} onClick={() => setUserMenuOpen(false)} />
+                <MenuItem label={t('menu.logout')} onClick={() => handleLogout()}/>
               </MenuList>
             )}
           </div>
@@ -128,4 +156,4 @@ const MenuBar = () => {
   );
 };
 
-export default MenuBar;
+export default MenuBarGuest;

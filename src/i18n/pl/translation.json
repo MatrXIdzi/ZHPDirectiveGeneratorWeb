@@ -8,9 +8,11 @@
         "name2": "Rozkazów"
     },
 
-    "nav": {
+    "menu": {
         "register": "Rejestracja",
-        "login": "Logowanie"
+        "login": "Logowanie",
+        "logout": "Wyloguj się",
+        "personalData": "Twoje Konto"
     },
 
     "register": {
@@ -28,7 +30,9 @@
         "errorRequired": "To pole jest wymagane",
         "invalidEmail": "Nieprawidłowy adres e-mail",
         "passwordTooShort": "Hasło musi mieć co najmniej 8 znaków",
-        "passwordsDontMatch": "Hasła nie są takie same"
+        "passwordsDontMatch": "Hasła nie są takie same",
+        "usernameAlreadyExists": "Nazwa użytkownika już istnieje",
+        "emailAlreadyExists": "Email już istnieje"
     },
 
     "login": {
@@ -48,6 +52,16 @@
         "text": "Generator Rozkazów ZHP",
         "year": "Copyright © 2025",
         "author": "Wiktor Idziński"
+    },
+
+    "personal-data": {
+        "firstname": "Imię",
+        "surname": "Nazwisko",
+        "email": "Email",
+        "username": "Nazwa użytkownika",
+        "function": "Funkcja",
+        "unit": "Jednostka",
+        "rank": "Stopień"
     },
       
 

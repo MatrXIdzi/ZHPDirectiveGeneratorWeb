@@ -66,4 +66,36 @@
     text-align: center;
     font-weight: bold;
   }
+
+  .password-input-container {
+    display: flex;
+    width: 100%;
+    align-items: stretch; /* Żeby input i button miały tę samą wysokość */
+  }
+  
+  .password-input-container input {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-right: none; /* żeby nie dublować granicy z buttonem */
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 4px 0 0 4px; /* zaokrąglenie tylko z lewej */
+    outline: none;
+  }
+  
+  .password-input-container .toggle-password {
+    border: 1px solid #ccc;
+    border-left: none; /* żeby nie dublować granicy z inputem */
+    padding: 0 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 4px 4px 0; /* zaokrąglenie tylko z prawej */
+    background-color: #333; /* lub dopasuj do tła inputa */
+  }
+  
+  .password-input-container .toggle-password i {
+    font-size: 1.2rem;
+  }
   

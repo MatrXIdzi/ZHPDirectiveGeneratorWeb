@@ -1,7 +1,7 @@
-import Footer from "./Footer";
-import MenuBar from "./MenuBar";
+import Footer from "../Footer";
+import MenuBar from "../menuBar/MenuBarGuest";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const LayoutGuest = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="layout-wrapper">
       <MenuBar />
@@ -13,4 +13,4 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Layout;
+export default LayoutGuest;

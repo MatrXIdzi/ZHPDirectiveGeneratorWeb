@@ -8,9 +8,11 @@
         "name2": "Generator"
     },
 
-    "nav": {
+    "menu": {
         "register": "Register",
-        "login": "Login"
+        "login": "Login",
+        "logout": "Logout",
+        "personalData": "Your Account"
     },
 
     "register": {
@@ -28,7 +30,9 @@
         "errorRequired": "This field is required",
         "invalidEmail": "Incorrect email address",
         "passwordTooShort": "Password must be at least 8 characters long",
-        "passwordsDontMatch": "Passwords do not match"
+        "passwordsDontMatch": "Passwords do not match",
+        "usernameAlreadyExists": "Username already exists",
+        "emailAlreadyExists": "Email already exists"
     },
 
     "login": {
